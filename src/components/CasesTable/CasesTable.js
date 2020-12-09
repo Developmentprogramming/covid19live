@@ -7,12 +7,19 @@ const fetchCovidApi = async () => {
     return decoded_data;
 }
 
+const fetchVisitorsCount = async () => {
+    return (await fetch('https://covid19livesudanapi.herokuapp.com/get_visitors')).json();
+}
+
 class CasesTable extends Component {
     constructor(props) {
         super(props)
-        this.state = { casesList: []}
+        this.state = { casesList: [], visitors: 0 }
         fetchCovidApi().then(data => {
             this.setState({ casesList: data })
+        })
+        fetchVisitorsCount().then(data => {
+            this.setState({ visitors: data })
         })
     }
 
@@ -56,7 +63,7 @@ class CasesTable extends Component {
                     </div>
                 </div>
                 <div className="flex flex-col text-center m-20">
-                    <span className="text-3xl text-black-500">#Visitors  <span className="text-green-600 font-semibold">120</span></span>
+                    <span className="text-3xl text-black-500">#Visitors  <span className="text-green-600 font-semibold">{this.state.visitors}</span></span>
                 </div>
             </div>
         )
