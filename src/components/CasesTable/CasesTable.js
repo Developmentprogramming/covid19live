@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import CasesTableItem from './CasesTableItem/CasesTableItem'
 
 const fetchCovidApi = async () => {
-    let array_data = await fetch("https://api.covid19api.com/country/sudan")
+    let array_data = await fetch("http://api.covid19api.com/country/sudan")
     let decoded_data = await array_data.json();
     return decoded_data;
 }
